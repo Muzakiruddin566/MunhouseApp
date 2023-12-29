@@ -1,0 +1,57 @@
+/* DataTable.css */
+.ag-theme-alpine {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ag-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow-x: auto; /* Allow horizontal scrolling for small screens */
+}
+
+.ag-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ag-theme-alpine {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ag-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  overflow-x: auto; /* Allow horizontal scrolling for small screens */
+}
+
+.ag-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ag-cell {
+  padding: 8px;
+}
+
+/* Set a fixed width for columns */
+.ag-header-cell,
+.ag-cell {
+  min-width: 120px;
+}
+
+/* Add media query for small screens */
+@media (max-width: 768px) {
+  .ag-cell,
+  .ag-header-cell {
+    min-width: auto; /* Remove fixed width on small screens */
+    flex: 1; /* Expand to full width on small screens */
+  }
+}

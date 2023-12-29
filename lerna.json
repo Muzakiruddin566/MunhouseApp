@@ -1,0 +1,15 @@
+{
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "packages": [
+    "backend/api-gateway",
+    "backend/user-authentication",
+    "backend/user",
+    "frontend/munhouse"
+  ],
+  "version": "1.0.0",
+  "command": {
+    "run": {
+      "npmClient": "npm"
+    }
+  }
+}

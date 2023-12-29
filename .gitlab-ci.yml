@@ -1,0 +1,47 @@
+image: docker
+
+services:
+  - docker:dind  
+
+stages:
+  - build_backend
+  - test_backend
+  - deploy
+
+before_script:
+  - apk --no-cache add nodejs npm
+  - npm install --legacy-peer-deps
+  - npm install ts-jest
+
+
+variables:
+  NODE_ENV: test
+
+cache:
+  paths:
+    - node_modules/
+
+build_backend:
+ stage: build_backend
+ script:
+  - cd api
+  - npm install --legacy-peer-deps
+  - apk add --no-cache docker-compose
+  - docker-compose build
+
+test_backend:
+  stage: test_backend
+  script:
+    - cd api
+    - npm install --legacy-peer-deps
+    - echo "Running backend tests"
+    - npm test
+  after_script:
+    - echo "Backend tests have completed. Terminating..."
+    - exit 0
+
+deploy:
+  stage: deploy
+  script:
+      - echo "running deploy stage"
+

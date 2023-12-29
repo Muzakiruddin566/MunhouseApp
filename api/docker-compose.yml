@@ -1,0 +1,79 @@
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+
+services:
+  gateway:
+    build:
+      context: .
+      dockerfile: ./apps/gateway/DockerFile
+      target: development
+    command: npm run start:dev gateway
+    env_file:
+      - ./apps/gateway/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '3000:3000'
+
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/DockerFile
+      target: development
+    command: npm run start:dev auth
+    env_file:
+      - ./apps/auth/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports: 
+      - '5673:5672'
+  
+  house:
+    build:
+      context: .
+      dockerfile: ./apps/house/DockerFile
+      target: development
+    command: npm run start:dev house
+    env_file:
+      - ./apps/house/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports: 
+      - '5674:5672'
+
+  user:
+    build:
+      context: .
+      dockerfile: ./apps/user/DockerFile
+      target: development
+    command: npm run start:dev user
+    env_file:
+      - ./apps/user/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  images:
+    build:
+      context: .
+      dockerfile: ./apps/images/DockerFile
+      target: development
+    command: npm run start:dev images
+    env_file:
+      - ./apps/images/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+  rabbitmq: 
+    image: rabbitmq
+    ports: 
+      - '5672:5672'
+
+volumes:
+  mongodb_master_data:
+    driver: local
